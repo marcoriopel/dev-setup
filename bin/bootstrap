@@ -1,0 +1,7 @@
+#!/bin/sh
+xcode-select --install
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+sudo -H pip3 install --ignore-installed ansible
+ansible-galaxy install --ignore-certs -r requirements.yml
+ansible-playbook -i "localhost," -c local ansible.yml --ask-become-pass -vvvv

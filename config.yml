@@ -1,0 +1,36 @@
+---
+configure_dotfiles: true
+dotfiles_repo: https://github.com/marcoriopel/dotfiles.git
+dotfiles_repo_version: main
+dotfiles_files:
+  - .zshrc
+  - .vimrc
+
+
+homebrew_installed_packages:
+  - 'autoconf'
+  - 'bash'
+  - 'curl'
+  - 'gh'
+  - 'helm'
+  - 'kubectx'
+  - 'kubernetes-cli'
+  - 'pre-commit'
+  - 'pyenv'
+  - 'skaffold'
+  - 'vim'
+  - 'virtualenv'
+  - 'xz'
+  - 'zsh'
+  - 'zsh-history-substring-search'
+
+homebrew_taps: []
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - docker
+  - google-chrome
+  - iterm2
+  - rectangle
+  - slack
+  - visual-studio-code
