@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
   connection: local
-  # gather_facts: false
 
   vars_files:
     - config.yml
@@ -15,56 +14,6 @@
       tags: ['dotfiles']
 
   tasks:
-    # - name: Install homebrew
-    #   include_role:
-    #     name: geerlingguy.mac.homebrew
-
-    # - name: Make sure homebrew bin is in path
-    #   ansible.builtin.lineinfile:
-    #     path: /etc/paths
-    #     state: present
-    #     line: '/opt/homebrew/bin'
-    #   become: true
-    #   become_user: root
-
-    # - name: 'add custom homebrew repos'
-    #   community.general.homebrew_tap:
-    #     name: [
-    #       adoptopenjdk/openjdk,
-    #       fishtown-analytics/dbt,
-    #       heroku/brew,
-    #       homebrew/cask-versions,
-    #       thoughtbot/formulae,
-    #       weaveworks/tap,
-    #     ]
-
-    # - name: "Install homebrew packages"
-    #   community.general.homebrew:
-    #     name: [
-    #       'autoconf',
-    #       'bash',
-    #       'curl',
-    #       'gh',
-    #       'helm',
-    #       'kubectx',
-    #       'kubernetes-cli',
-    #       'pre-commit',
-    #       'pyenv',
-    #       'skaffold',
-    #       'vim',
-    #       'virtualenv',
-    #       'xz',
-    #       'zsh',
-    #       'zsh-history-substring-search',
-    #     ]
-    #     state: present
-    #     update_homebrew: yes
-
-    - name: "Install from Mac app store"
-      shell: mas install {{ item }}
-      with_items:
-        - 497799835 # xcode
-
     - name: Get the path to ZSH
       become: false
       local_action: command which zsh
@@ -92,8 +41,6 @@
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
 
-
-    # Add something which ensures path is set here
     - name: Install VSCode extensions
       shell: code --install-extension {{ item }}
       with_items:
@@ -144,31 +91,3 @@
         - wholroyd.jinja
         - yzhang.markdown-all-in-one
         - zxh404.vscode-proto3
-
-    - git:
-        repo: https://github.com/asdf-vm/asdf.git
-        dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
-        version: v0.8.1
-
-    - name: "Create a default asdf configuration"
-      template:
-        src: templates/.asdfrc.j2
-        dest: /Users/{{ lookup('env', 'USER') }}/.asdfrc
-        owner: "{{ lookup('env', 'USER') }}"
-        force: yes
-
-    - name: "Install asdf plugins"
-      shell: |
-        source /Users/{{ lookup('env', 'USER') }}/.asdf/asdf.sh
-        asdf plugin-add {{ item }} || exit 0
-      with_items:
-        - python
-        - golang
-
-    - name: "Install Default Python"
-      shell: |
-        source /Users/{{ lookup('env', 'USER') }}/.asdf/asdf.sh
-        asdf install python 3.11.0
-        asdf global python 3.11.0
-        pip3 install ansible
-        asdf reshim python
