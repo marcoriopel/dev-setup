@@ -9,29 +9,51 @@ dotfiles_files:
 
 homebrew_installed_packages:
   - 'autoconf'
+  - 'awscli'
+  - 'base64'
   - 'bash'
+  - 'circleci'
+  - 'cloudflared'
   - 'curl'
+  - 'direnv'
+  - 'docker-credential-helper'
   - 'gh'
   - 'helm'
+  - 'jq'
   - 'kubectx'
   - 'kubernetes-cli'
+  - 'node'
+  - 'openssh'
+  - 'libpq'
+  - 'pcre'
   - 'pre-commit'
   - 'poetry'
+  - 'postgresql@16'
   - 'pyenv'
+  - 'renovate'
   - 'skaffold'
+  - 'sops'
+  - 'terraform-docs'
+  - 'tfenv'
+  - 'tgenv'
   - 'vim'
   - 'virtualenv'
   - 'xz'
+  - 'zlib'
   - 'zsh'
   - 'zsh-history-substring-search'
+  - 'hashicorp/tap/terraform'
+  - 'warrensbox/tap/tgswitch'
+  - 'watch'
 
-homebrew_taps: []
+homebrew_taps:
+  - { name: hashicorp/tap, url: 'https://github.com/hashicorp/homebrew-tap.git' }
+  - { name: warrensbox/tap, url: 'https://github.com/warrensbox/homebrew-tap.git' }
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps: 
+  - aws-vault
   - docker
-  - google-chrome
   - iterm2
   - rectangle
-  - slack
-  - visual-studio-code
+  - 1password-cli
